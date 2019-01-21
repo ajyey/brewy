@@ -7,13 +7,75 @@
 //
 
 import Cocoa
+import Alamofire
+import SwiftyJSON
 
 class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //url for the github raw data
+        let githubRaw = "https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/"
+//        var casks = [String]
+        
+        //read the file in the resources folder
+        if let path = Bundle.main.path(forResource: "cask_names", ofType: "txt" , inDirectory: "Resources"){
+            let text = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
+            let casks = text.components(separatedBy: .newlines)
+            for cask in casks{
+                let url = githubRaw+cask+".rb"
+                Alamofire.request(url)
+                    .responseString{ response in
+        
+                        switch(response.result) {
+                        case .success(_):
+                            if let data = response.result.value{
+                                //separate the files
+                                let com = data.components(separatedBy: .newlines)
+                                var version = ""
+                                var url = ""
+                                for item in com {
+                                    //split on space
+                                    let line = item.trimmingCharacters(in: .whitespacesAndNewlines)
+                                    let lineSep = line.components(separatedBy: .whitespaces)
+                                    //get the version
+                                    if(lineSep[0]=="version"){
+                                        version = lineSep[1].replacingOccurrences(of: "'", with: "")
+                                        print(version)
+                                    }
+                                    if(lineSep[0]=="url"){
+                                        url = lineSep[1]
+                                        url = url.replacingOccurrences(of: "'", with: "")
+                                        url = url.replacingOccurrences(of: "\"", with: "")
+                                        if(url.contains("#{version}")){
+                                            url = url.replacingOccurrences(of: "#{version}", with: version)
+                                        }
+                                        //perform the download
+                                        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
 
-        // Do any additional setup after loading the view.
+                                            let home = FileManager.default.homeDirectoryForCurrentUser
+                                            var downloadsFolder = home.appendingPathComponent("Downloads")
+                                            downloadsFolder.appendPathComponent("chrome.dmg")
+                                            return (downloadsFolder, [.removePreviousFile])
+                                        }
+                                        Alamofire.download(url, to: destination).downloadProgress { progress in
+                                            print("Progress: \(progress.fractionCompleted)")
+                                        }
+
+                                    }
+                                    
+                                }
+                            }
+                        case .failure(_):
+                            print("Error message:\(String(describing: response.result.error))")
+                            break
+                        }
+                }
+            }
+
+        }else{
+            print("File not found")
+        }
     }
 
     override var representedObject: Any? {
@@ -21,7 +83,6 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
 
 }
 
