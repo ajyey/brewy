@@ -29,8 +29,10 @@ class App {
         //Order for parsing
         /*
          1. Version
-         2. url
+         2. URL
          3. App name
+         4. Zap Trash for full uninstallation
+         5.
          
          */
     }
