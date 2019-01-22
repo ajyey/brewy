@@ -22,63 +22,64 @@ class ViewController: NSViewController {
         if let path = Bundle.main.path(forResource: "cask_names", ofType: "txt" , inDirectory: "Resources"){
             let text = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
             let casks = text.components(separatedBy: .newlines)
-            var count = 0
-            for cask in casks{
+            for cask in casks {
                 let url = githubRaw+cask
-                Alamofire.request(url)
-                    .responseString{ response in
+                Alamofire.request(url).responseString{
+                    response in
                         switch(response.result) {
-                        case .success(_):
-                            if let data = response.result.value{
-                                //separate the files
-                                let com = data.components(separatedBy: .newlines)
-                                var version = ""
-                                var url = ""
-                                for item in com {
-                                    //split on space
-                                    let line = item.trimmingCharacters(in: .whitespacesAndNewlines)
-                                    let lineSep = line.components(separatedBy: .whitespaces)
-                                    
-
-                                    
-                                    //get the version
-                                    if(lineSep[0]=="version"){
-                                        version = lineSep[1].replacingOccurrences(of: "'", with: "")
-                                    }
-                                    if(lineSep[0]=="url"){
-                                        var url = ""
-                                        for i in 1..<lineSep.count{
-                                            url+=lineSep[i]
+                            case .success(_):
+                                if let data = response.result.value{
+                                    //separate the files
+                                    let com = data.components(separatedBy: .newlines)
+                                    var version = ""
+                                    var url = ""
+                                    var app = ""
+                                    for item in com {
+                                        //split on space
+                                        let line = item.trimmingCharacters(in: .whitespacesAndNewlines)
+                                        let lineSep = line.components(separatedBy: .whitespaces)
+                                        //get the app name
+                                        if(lineSep[0]=="app"){
+                                            for i in 1..<lineSep.count{
+                                                app+=lineSep[i]
+                                            }
+                                            app = String(app.split(separator: ".")[0])
+                                            print(app)
                                         }
-                                        url = url.replacingOccurrences(of: "'", with: "")
-                                        url = url.replacingOccurrences(of: "\"", with: "")
-                                        print(url)
-//                                        if(url.contains(".pkg")){
-//                                            print(url)
-//                                        }
+                                        //get the version
+                                        if(lineSep[0]=="version"){
+                                            version = lineSep[1].replacingOccurrences(of: "'", with: "")
+                                        }
+                                        if(lineSep[0]=="url"){
+                                            var url = ""
+                                            for i in 1..<lineSep.count{
+                                                url+=lineSep[i]
+                                            }
+                                            url = url.replacingOccurrences(of: "'", with: "")
+                                            url = url.replacingOccurrences(of: "\"", with: "")
 
-//                                        if(url.contains("#{version}")){
-//                                            url = url.replacingOccurrences(of: "#{version}", with: version)
-//                                        }
-                                        //perform the download
-//                                        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-//
-//                                            let home = FileManager.default.homeDirectoryForCurrentUser
-//                                            var downloadsFolder = home.appendingPathComponent("Downloads")
-//                                            downloadsFolder.appendPathComponent("chrome.dmg")
-//                                            return (downloadsFolder, [.removePreviousFile])
-//                                        }
-//                                        Alamofire.download(url, to: destination).downloadProgress { progress in
-//                                            print("Progress: \(progress.fractionCompleted)")
-//                                        }
-
+                                            if(url.contains("#{version}")){
+                                                url = url.replacingOccurrences(of: "#{version}", with: version)
+                                            }
+                                            //perform the download
+                                            let destination = DownloadRequest.suggestedDownloadDestination(for: .downloadsDirectory)
+                                            Alamofire.download(url, to: destination)
+                                                .downloadProgress {progress in
+                                                    print("Progress: \(Double(round(progress.fractionCompleted*1000)/1000))")
+                                                }
+                                                .response{
+                                                    response in
+                                                        //get the suggested file name chosen by alamofire
+                                                        let destination = response.destinationURL!.absoluteString.split(separator: "/")
+                                                        let fileName = destination[destination.count-1]
+                                                        print(fileName)
+                                                }
+                                        }
                                     }
-                                    
                                 }
-                            }
-                        case .failure(_):
-                            print("Error message:\(String(describing: response.result.error))")
-                            break
+                            case .failure(_):
+                                print("Error message:\(String(describing: response.result.error))")
+                                break
                         }
                 }
             }
