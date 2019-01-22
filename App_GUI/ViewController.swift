@@ -22,11 +22,11 @@ class ViewController: NSViewController {
         if let path = Bundle.main.path(forResource: "cask_names", ofType: "txt" , inDirectory: "Resources"){
             let text = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
             let casks = text.components(separatedBy: .newlines)
+            var count = 0
             for cask in casks{
-                let url = githubRaw+cask+".rb"
+                let url = githubRaw+cask
                 Alamofire.request(url)
                     .responseString{ response in
-        
                         switch(response.result) {
                         case .success(_):
                             if let data = response.result.value{
@@ -38,29 +38,39 @@ class ViewController: NSViewController {
                                     //split on space
                                     let line = item.trimmingCharacters(in: .whitespacesAndNewlines)
                                     let lineSep = line.components(separatedBy: .whitespaces)
+                                    
+
+                                    
                                     //get the version
                                     if(lineSep[0]=="version"){
                                         version = lineSep[1].replacingOccurrences(of: "'", with: "")
-                                        print(version)
                                     }
                                     if(lineSep[0]=="url"){
-                                        url = lineSep[1]
+                                        var url = ""
+                                        for i in 1..<lineSep.count{
+                                            url+=lineSep[i]
+                                        }
                                         url = url.replacingOccurrences(of: "'", with: "")
                                         url = url.replacingOccurrences(of: "\"", with: "")
-                                        if(url.contains("#{version}")){
-                                            url = url.replacingOccurrences(of: "#{version}", with: version)
-                                        }
-                                        //perform the download
-                                        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+                                        print(url)
+//                                        if(url.contains(".pkg")){
+//                                            print(url)
+//                                        }
 
-                                            let home = FileManager.default.homeDirectoryForCurrentUser
-                                            var downloadsFolder = home.appendingPathComponent("Downloads")
-                                            downloadsFolder.appendPathComponent("chrome.dmg")
-                                            return (downloadsFolder, [.removePreviousFile])
-                                        }
-                                        Alamofire.download(url, to: destination).downloadProgress { progress in
-                                            print("Progress: \(progress.fractionCompleted)")
-                                        }
+//                                        if(url.contains("#{version}")){
+//                                            url = url.replacingOccurrences(of: "#{version}", with: version)
+//                                        }
+                                        //perform the download
+//                                        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+//
+//                                            let home = FileManager.default.homeDirectoryForCurrentUser
+//                                            var downloadsFolder = home.appendingPathComponent("Downloads")
+//                                            downloadsFolder.appendPathComponent("chrome.dmg")
+//                                            return (downloadsFolder, [.removePreviousFile])
+//                                        }
+//                                        Alamofire.download(url, to: destination).downloadProgress { progress in
+//                                            print("Progress: \(progress.fractionCompleted)")
+//                                        }
 
                                     }
                                     
@@ -72,7 +82,6 @@ class ViewController: NSViewController {
                         }
                 }
             }
-
         }else{
             print("File not found")
         }
