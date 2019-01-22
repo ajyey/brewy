@@ -12,6 +12,7 @@
 		21AB1DFA21F5BD1000A1A380 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21AB1DF921F5BD1000A1A380 /* Assets.xcassets */; };
 		21AB1DFD21F5BD1000A1A380 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21AB1DFB21F5BD1000A1A380 /* Main.storyboard */; };
 		21CF793121F5C5CC009D86CA /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 21CF793021F5C5CC009D86CA /* Resources */; };
+		21CF793321F6E29E009D86CA /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CF793221F6E29E009D86CA /* App.swift */; };
 		37FC0B5A8353A018AE8880E3 /* Pods_App_GUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFE2FB8F0860AEC5A9D9A77 /* Pods_App_GUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		21AB1DFE21F5BD1000A1A380 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21AB1DFF21F5BD1000A1A380 /* App_GUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App_GUI.entitlements; sourceTree = "<group>"; };
 		21CF793021F5C5CC009D86CA /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
+		21CF793221F6E29E009D86CA /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		82828AF81B5ECD339CA1B287 /* Pods-App_GUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App_GUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App_GUI/Pods-App_GUI.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +71,7 @@
 				21AB1DFB21F5BD1000A1A380 /* Main.storyboard */,
 				21AB1DFE21F5BD1000A1A380 /* Info.plist */,
 				21AB1DFF21F5BD1000A1A380 /* App_GUI.entitlements */,
+				21CF793221F6E29E009D86CA /* App.swift */,
 			);
 			path = App_GUI;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21CF793321F6E29E009D86CA /* App.swift in Sources */,
 				21AB1DF821F5BD0F00A1A380 /* ViewController.swift in Sources */,
 				21AB1DF621F5BD0F00A1A380 /* AppDelegate.swift in Sources */,
 			);
