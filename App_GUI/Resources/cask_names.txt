@@ -120,8 +120,8 @@ tower.rb
 transmission.rb
 transmit.rb
 tunnelbear.rb
-unity.rb
 viber.rb
+virtualbox.rb
 visual-studio-code.rb
 vlc.rb
 vox.rb
