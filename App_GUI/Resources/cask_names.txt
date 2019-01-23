@@ -125,6 +125,7 @@ viber.rb
 visual-studio-code.rb
 vlc.rb
 vox.rb
+vyprvpn.rb
 wechat.rb
 whatsapp.rb
 windscribe.rb
