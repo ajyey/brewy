@@ -20,7 +20,9 @@ class ViewController: NSViewController {
         let myGroup = DispatchGroup()
         createListOfApps(mydispatch: myGroup)
         myGroup.notify(queue: .main){
-            print(self.apps.count)
+            for app in self.apps{
+                print(app.githubRaw)
+            }
         }
     }
     override var representedObject: Any? {
@@ -33,29 +35,29 @@ class ViewController: NSViewController {
         if let path = Bundle.main.path(forResource: "cask_names", ofType: "txt" , inDirectory: "Resources"){
             let text = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
             let casks = text.components(separatedBy: .newlines)
-            for cask in casks{
-                if(cask.isEmpty){
-                    continue
-                }
-                mydispatch.enter()
-                let url = githubRaw + cask
-                Alamofire.request(url).responseString{
-                    response in
-                    switch(response.result) {
-                    case .success(_):
-                        if let data = response.result.value {
-                            //separate the files
-                            self.apps.append(App(github_raw: data)!)
+
+                for cask in casks{
+                    if(cask.isEmpty){
+                        continue
+                    }
+                    mydispatch.enter()
+                    let url = githubRaw + cask
+                    Alamofire.request(url).responseString{
+                        response in
+                        switch(response.result) {
+                        case .success(_):
+                            if let data = response.result.value {
+                                //separate the files
+                                self.apps.append(App(githubRaw: data)!)
+                                mydispatch.leave()
+                            }
+                        case .failure(_):
                             mydispatch.leave()
+                            print("Error message:\(String(describing: response.result.error))")
+                            break
                         }
-                    case .failure(_):
-                        mydispatch.leave()
-                        print("Error message:\(String(describing: response.result.error))")
-                        break
                     }
                 }
-                
-            }
         }else{
         print("File not found")
         }

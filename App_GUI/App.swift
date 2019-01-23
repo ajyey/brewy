@@ -9,18 +9,19 @@
 import Foundation
 
 class App {
-    var github_raw: String
+    var githubRaw: String
     var name: String?
     var url: String?
     var version: String?
+    var caskName:String?
     
     //MARK: Initialization
-    init?(github_raw:String){
+    init?(githubRaw:String){
         //test for github_raw empty
-        if(github_raw.isEmpty){
+        if(githubRaw.isEmpty){
             return nil
         }
-        self.github_raw = github_raw
+        self.githubRaw = githubRaw
 
     }
     
@@ -32,7 +33,7 @@ class App {
          2. URL
          3. App name
          4. Zap Trash for full uninstallation
-         5.
+         5. Cask name
          
          */
     }
