@@ -65,6 +65,7 @@ istat-menus.rb
 iterm2.rb
 itsycal.rb
 jetbrains-toolbox.rb
+keepingyouawake.rb
 keyboard-maestro.rb
 kindle.rb
 kodi.rb

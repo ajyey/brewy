@@ -20,9 +20,9 @@ class ViewController: NSViewController {
         let myGroup = DispatchGroup()
         createListOfApps(mydispatch: myGroup)
         myGroup.notify(queue: .main){
-            for app in self.apps{
-                print(app.githubRaw)
-            }
+//            for app in self.apps{
+//                print(app.githubRaw)
+//            }
         }
     }
     override var representedObject: Any? {
@@ -44,6 +44,7 @@ class ViewController: NSViewController {
                     let url = githubRaw + cask
                     Alamofire.request(url).responseString{
                         response in
+                        print(response.response?.expectedContentLength as! Int64)
                         switch(response.result) {
                         case .success(_):
                             if let data = response.result.value {
