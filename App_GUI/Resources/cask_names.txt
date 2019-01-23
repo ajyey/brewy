@@ -59,6 +59,8 @@ google-backup-and-sync.rb
 google-chrome.rb
 handbrake.rb
 hazel.rb
+imagealpha.rb
+imageoptim.rb
 intellij-idea-ce.rb
 ipvanish-vpn.rb
 istat-menus.rb
