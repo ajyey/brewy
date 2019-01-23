@@ -101,6 +101,7 @@ qt-creator.rb
 rubymine.rb
 setapp.rb
 simplenote.rb
+sketch.rb
 skitch.rb
 skype-for-business.rb
 skype.rb
