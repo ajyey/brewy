@@ -353,7 +353,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 82828AF81B5ECD339CA1B287 /* Pods-App_GUI.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
 				CODE_SIGN_ENTITLEMENTS = App_GUI/App_GUI.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -375,7 +375,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 064A1293D08F6611495F2D9D /* Pods-App_GUI.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
 				CODE_SIGN_ENTITLEMENTS = App_GUI/App_GUI.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
