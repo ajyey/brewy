@@ -23,6 +23,7 @@ calibre.rb
 camxav.rb
 carbon-copy-cloner.rb
 chronosync.rb
+cinebench.rb
 clementine.rb
 coda.rb
 cyberduck.rb
