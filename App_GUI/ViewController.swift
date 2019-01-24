@@ -62,7 +62,10 @@ class ViewController: NSViewController {
         }else{
             print("File not found")
         }
-}
+    }
+    func parseGithubRaw(){
+        
+    }
 }
             
 //            for cask in casks {

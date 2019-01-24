@@ -10,31 +10,17 @@ import Foundation
 
 class App {
     var githubRaw: String
-    var name: String?
-    var url: String?
-    var version: String?
-    var caskName:String?
+    var name: String
+    var url: String
+    var version: String
+    var caskName:String
     
     //MARK: Initialization
-    init?(githubRaw:String){
-        //test for github_raw empty
-        if(githubRaw.isEmpty){
-            return nil
-        }
+    init(githubRaw:String, name:String, url:String, version:String, caskName:String){
         self.githubRaw = githubRaw
-
-    }
-    
-    func parseGithubRaw(){
-        //parse github raw file and set this app's fields
-        //Order for parsing
-        /*
-         1. Version
-         2. URL
-         3. App name
-         4. Zap Trash for full uninstallation
-         5. Cask name
-         
-         */
+        self.name = name
+        self.url = url
+        self.version = version
+        self.caskName = caskName
     }
 }
