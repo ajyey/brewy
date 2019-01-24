@@ -48,8 +48,8 @@ class ViewController: NSViewController {
                         switch(response.result) {
                         case .success(_):
                             if let data = response.result.value {
-                                //separate the files
-                                self.apps.append(App(githubRaw: data)!)
+                                let appObj = self.parseGithubRaw(githubRaw: data)
+                                self.apps.append(appObj!)
                                 mydispatch.leave()
                             }
                         case .failure(_):
@@ -63,8 +63,10 @@ class ViewController: NSViewController {
             print("File not found")
         }
     }
-    func parseGithubRaw(){
+    func parseGithubRaw(githubRaw:String) -> App? {
+        //TODO: Parse the github raw gile, create a new app object and return it to the main view controller to be added to the array of apps
         
+        return nil
     }
 }
             
