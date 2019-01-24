@@ -12,7 +12,6 @@ atext.rb
 atom.rb
 audirvana.rb
 avg-antivirus.rb
-avira-antivirus.rb
 backblaze.rb
 bartender.rb
 bbedit.rb
@@ -44,7 +43,6 @@ eclipse-ide.rb
 elmedia-player.rb
 epic-games.rb
 evernote.rb
-expressvpn.rb
 fantastical.rb
 firefox.rb
 flux.rb
@@ -75,12 +73,8 @@ libreoffice.rb
 lightworks.rb
 liteicon.rb
 little-snitch.rb
-malwarebytes.rb
-mamp.rb
 marsedit.rb
-mullvadvpn.rb
 mysqlworkbench.rb
-nordvpn.rb
 omnifocus.rb
 omnigraffle.rb
 omnioutliner.rb
@@ -103,7 +97,6 @@ setapp.rb
 simplenote.rb
 sketch.rb
 skitch.rb
-skype-for-business.rb
 skype.rb
 slack.rb
 sourcetree.rb

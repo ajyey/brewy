@@ -44,7 +44,7 @@ class ViewController: NSViewController {
                     let url = githubRaw + cask
                     Alamofire.request(url).responseString{
                         response in
-                        print(response.response?.expectedContentLength as! Int64)
+//                        print(response.response?.expectedContentLength as! Int64)
                         switch(response.result) {
                         case .success(_):
                             if let data = response.result.value {
@@ -60,7 +60,7 @@ class ViewController: NSViewController {
                     }
                 }
         }else{
-        print("File not found")
+            print("File not found")
         }
 }
 }
@@ -84,48 +84,48 @@ class ViewController: NSViewController {
 ////                            var version = ""
 ////                            var url = ""
 ////                            var app = ""
-////                            for item in com {
-////                                //split on space
-////                                let line = item.trimmingCharacters(in: .whitespacesAndNewlines)
-////                                let lineSep = line.components(separatedBy: .whitespaces)
-////                                //get the app name
-////                                if(lineSep[0]=="app"){
-////                                    for i in 1..<lineSep.count{
-////                                        app+=lineSep[i]
-////                                    }
-////                                    app = String(app.split(separator: ".")[0])
-////                                    print(app)
-////                                }
-////                                //get the version
-////                                if(lineSep[0]=="version"){
-////                                    version = lineSep[1].replacingOccurrences(of: "'", with: "")
-////                                }
-////                                if(lineSep[0]=="url"){
-////                                    var url = ""
-////                                    for i in 1..<lineSep.count{
-////                                        url+=lineSep[i]
-////                                    }
-////                                    url = url.replacingOccurrences(of: "'", with: "")
-////                                    url = url.replacingOccurrences(of: "\"", with: "")
-////
-////                                    if(url.contains("#{version}")){
-////                                        url = url.replacingOccurrences(of: "#{version}", with: version)
-////                                    }
-////                                    //perform the download
-////                                    let destination = DownloadRequest.suggestedDownloadDestination(for: .downloadsDirectory)
-////                                    Alamofire.download(url, to: destination)
-////                                        .downloadProgress {progress in
-////                                            print("Progress: \(Double(round(progress.fractionCompleted*1000)/1000))")
-////                                        }
-////                                        .response{
-////                                            response in
-////                                            //get the suggested file name chosen by alamofire
-////                                            let destination = response.destinationURL!.absoluteString.split(separator: "/")
-////                                            let fileName = destination[destination.count-1]
-////                                            print(fileName)
-////                                    }
-////                                }
-////                            }
+//                            for item in com {
+//                                //split on space
+//                                let line = item.trimmingCharacters(in: .whitespacesAndNewlines)
+//                                let lineSep = line.components(separatedBy: .whitespaces)
+//                                //get the app name
+//                                if(lineSep[0]=="app"){
+//                                    for i in 1..<lineSep.count{
+//                                        app+=lineSep[i]
+//                                    }
+//                                    app = String(app.split(separator: ".")[0])
+//                                    print(app)
+//                                }
+//                                //get the version
+//                                if(lineSep[0]=="version"){
+//                                    version = lineSep[1].replacingOccurrences(of: "'", with: "")
+//                                }
+//                                if(lineSep[0]=="url"){
+//                                    var url = ""
+//                                    for i in 1..<lineSep.count{
+//                                        url+=lineSep[i]
+//                                    }
+//                                    url = url.replacingOccurrences(of: "'", with: "")
+//                                    url = url.replacingOccurrences(of: "\"", with: "")
+//
+//                                    if(url.contains("#{version}")){
+//                                        url = url.replacingOccurrences(of: "#{version}", with: version)
+//                                    }
+//                                    //perform the download
+//                                    let destination = DownloadRequest.suggestedDownloadDestination(for: .downloadsDirectory)
+//                                    Alamofire.download(url, to: destination)
+//                                        .downloadProgress {progress in
+//                                            print("Progress: \(Double(round(progress.fractionCompleted*1000)/1000))")
+//                                        }
+//                                        .response{
+//                                            response in
+//                                            //get the suggested file name chosen by alamofire
+//                                            let destination = response.destinationURL!.absoluteString.split(separator: "/")
+//                                            let fileName = destination[destination.count-1]
+//                                            print(fileName)
+//                                    }
+//                                }
+//                            }
 //                        }
 //                    case .failure(_):
 //                        print("Error message:\(String(describing: response.result.error))")
