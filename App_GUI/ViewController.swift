@@ -74,18 +74,19 @@ class ViewController: NSViewController {
     }
     func parseGithubRaw(githubRaw:String, cask:String) -> App? {
         //TODO: Parse the github raw gile, create a new app object and return it to the main view controller to be added to the array of apps
+//        print(githubRaw)
         let separatedByNewline = githubRaw.components(separatedBy: .newlines)
+        var version:String = ""
+        var url:String = ""
+        var app:String = ""
+        var homepage:String = ""
         for line in separatedByNewline {
             let currentLineTrimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
             let split = currentLineTrimmed.components(separatedBy: .whitespaces)
-            
-            var version:String = ""
-            var url:String = ""
-            var app:String = ""
-            var homepage:String = ""
-            
+//            print(currentLineTrimmed)
             switch split[0] {
             case "app":
+//                print(split)
                 app = currentLineTrimmed.components(separatedBy: "app ")[1]
                 if app.contains("target: ") {
                     app = app.components(separatedBy: "target: ")[1]
@@ -100,10 +101,13 @@ class ViewController: NSViewController {
 //                print(url)
             case "homepage":
                 homepage = currentLineTrimmed.components(separatedBy: "homepage ")[1]
-                print(homepage)
+//                print(homepage)
             default:
                 break
             }
+        }
+        if(app==""){
+            print(cask)
         }
         return nil
     }
