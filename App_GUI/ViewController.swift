@@ -17,12 +17,16 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var title:String=""
         let myGroup = DispatchGroup()
         createListOfApps(mydispatch: myGroup)
         myGroup.notify(queue: .main){
 //            for app in self.apps{
 //                print(app.githubRaw)
 //            }
+            title="gotem"
+            let myButton = NSButton(title: title, target: self, action: #selector(self.myButtonAction))
+            self.view.addSubview(myButton)
         }
     }
     override var representedObject: Any? {
@@ -30,16 +34,21 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-    
+    @objc func myButtonAction(sender: NSButton!) {
+        print(sender.title)
+    }
     func createListOfApps(mydispatch:DispatchGroup){
+        //check if the cask list exists
         if let path = Bundle.main.path(forResource: "cask_names", ofType: "txt" , inDirectory: "Resources"){
+            //get the contents of the file
             let text = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
+            //separate the casks by newlines
             let casks = text.components(separatedBy: .newlines)
-
                 for cask in casks{
                     if(cask.isEmpty){
                         continue
                     }
+                    
                     mydispatch.enter()
                     let url = githubRaw + cask
                     Alamofire.request(url).responseString{
@@ -48,8 +57,8 @@ class ViewController: NSViewController {
                         switch(response.result) {
                         case .success(_):
                             if let data = response.result.value {
-                                let appObj = self.parseGithubRaw(githubRaw: data)
-                                self.apps.append(appObj!)
+                                let appObj:App? = self.parseGithubRaw(githubRaw: data, cask: cask)
+//                                self.apps.append(appObj!)
                                 mydispatch.leave()
                             }
                         case .failure(_):
@@ -63,9 +72,30 @@ class ViewController: NSViewController {
             print("File not found")
         }
     }
-    func parseGithubRaw(githubRaw:String) -> App? {
+    func parseGithubRaw(githubRaw:String, cask:String) -> App? {
         //TODO: Parse the github raw gile, create a new app object and return it to the main view controller to be added to the array of apps
-        
+        let separatedByNewline = githubRaw.components(separatedBy: .newlines)
+        for line in separatedByNewline {
+            let currentLineTrimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
+            let split = currentLineTrimmed.components(separatedBy: .whitespaces)
+            switch split[0] {
+                
+            case "app":
+                var app:String = ""
+                var temp = currentLineTrimmed.components(separatedBy: "app ")[1]
+                if temp.contains("target: ") {
+                    temp = temp.components(separatedBy: "target: ")[1]
+                }
+            case "version":
+            //TODO: handle version logic
+                break
+            case "url":
+            //TODO: handle url logic
+                break
+            default:
+                break
+            }
+        }
         return nil
     }
 }

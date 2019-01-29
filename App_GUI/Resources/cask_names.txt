@@ -95,7 +95,6 @@ qbittorrent.rb
 qt-creator.rb
 rubymine.rb
 setapp.rb
-simplenote.rb
 sketch.rb
 skitch.rb
 skype.rb
@@ -127,5 +126,4 @@ wechat.rb
 whatsapp.rb
 windscribe.rb
 xampp.rb
-yakyak.rb
 yummy-ftp.rb
