@@ -78,20 +78,25 @@ class ViewController: NSViewController {
         for line in separatedByNewline {
             let currentLineTrimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
             let split = currentLineTrimmed.components(separatedBy: .whitespaces)
+            
+            var version:String = ""
+            var url:String = ""
+            var app:String = ""
+            
             switch split[0] {
-                
             case "app":
-                var app:String = ""
-                var temp = currentLineTrimmed.components(separatedBy: "app ")[1]
-                if temp.contains("target: ") {
-                    temp = temp.components(separatedBy: "target: ")[1]
+                app = currentLineTrimmed.components(separatedBy: "app ")[1]
+                if app.contains("target: ") {
+                    app = app.components(separatedBy: "target: ")[1]
                 }
+                print(app)
             case "version":
-            //TODO: handle version logic
-                break
+                version = currentLineTrimmed.components(separatedBy: "version ")[1]
+                print(version)
             case "url":
-            //TODO: handle url logic
-                break
+            //TODO: handle url logic - replace all permutations of version in the url
+                url = currentLineTrimmed.components(separatedBy: "url ")[1]
+                print(url)
             default:
                 break
             }
