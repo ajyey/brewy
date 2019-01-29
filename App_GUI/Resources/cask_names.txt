@@ -16,6 +16,7 @@ caffeine.rb
 calibre.rb
 carbon-copy-cloner.rb
 clementine.rb
+coconutbattery.rb
 coda.rb
 cyberduck.rb
 cyberghost.rb

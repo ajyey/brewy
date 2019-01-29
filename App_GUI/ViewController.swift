@@ -21,9 +21,6 @@ class ViewController: NSViewController {
         let myGroup = DispatchGroup()
         createListOfApps(mydispatch: myGroup)
         myGroup.notify(queue: .main){
-//            for app in self.apps{
-//                print(app.githubRaw)
-//            }
             title="gotem"
             let myButton = NSButton(title: title, target: self, action: #selector(self.myButtonAction))
             self.view.addSubview(myButton)
