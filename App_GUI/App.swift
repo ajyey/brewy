@@ -14,13 +14,15 @@ class App {
     var url: String
     var version: String
     var caskName:String
+    var homepage:String
     
     //MARK: Initialization
-    init(githubRaw:String, name:String, url:String, version:String, caskName:String){
+    init(githubRaw:String, name:String, url:String, version:String, caskName:String, homepage:String){
         self.githubRaw = githubRaw
         self.name = name
         self.url = url
         self.version = version
         self.caskName = caskName
+        self.homepage = homepage
     }
 }

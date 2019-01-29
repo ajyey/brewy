@@ -82,6 +82,7 @@ class ViewController: NSViewController {
             var version:String = ""
             var url:String = ""
             var app:String = ""
+            var homepage:String = ""
             
             switch split[0] {
             case "app":
@@ -89,14 +90,17 @@ class ViewController: NSViewController {
                 if app.contains("target: ") {
                     app = app.components(separatedBy: "target: ")[1]
                 }
-                print(app)
+//                print(app)
             case "version":
                 version = currentLineTrimmed.components(separatedBy: "version ")[1]
-                print(version)
+//                print(version)
             case "url":
             //TODO: handle url logic - replace all permutations of version in the url
                 url = currentLineTrimmed.components(separatedBy: "url ")[1]
-                print(url)
+//                print(url)
+            case "homepage":
+                homepage = currentLineTrimmed.components(separatedBy: "homepage ")[1]
+                print(homepage)
             default:
                 break
             }
