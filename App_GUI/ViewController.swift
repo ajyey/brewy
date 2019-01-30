@@ -21,7 +21,7 @@ class ViewController: NSViewController {
         let myGroup = DispatchGroup()
         createListOfApps(mydispatch: myGroup)
         myGroup.notify(queue: .main){
-            title="gotem"
+            title="Click Me!"
             let myButton = NSButton(title: title, target: self, action: #selector(self.myButtonAction))
             self.view.addSubview(myButton)
         }
@@ -32,7 +32,9 @@ class ViewController: NSViewController {
         }
     }
     @objc func myButtonAction(sender: NSButton!) {
-        print(sender.title)
+        sender.title="You clicked me!"
+        //resizes the button to fit new title/contents
+        sender.sizeToFit()
     }
     func createListOfApps(mydispatch:DispatchGroup){
         //check if the cask list exists
@@ -45,12 +47,14 @@ class ViewController: NSViewController {
                     if(cask.isEmpty){
                         continue
                     }
-                    
                     mydispatch.enter()
                     let url = githubRaw + cask
                     Alamofire.request(url).responseString{
                         response in
-//                        print(response.response?.expectedContentLength as! Int64)
+                        //gets the expected content length from the http header response. This will be useful when showing download progress for apps
+                        //this currently converts bytes to megabytes by dividing by 1000000
+                        let sizeOfContent = Float(response.response!.expectedContentLength as Int64)/1000000
+                        print(sizeOfContent)
                         switch(response.result) {
                         case .success(_):
                             if let data = response.result.value {
