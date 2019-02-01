@@ -12,7 +12,7 @@ import SwiftyJSON
 import PromiseKit
 
 class ViewController: NSViewController {
-    var apps:[App] = []
+    var apps:[String: App]=[:]
     let githubRaw = "https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/"
     
     override func viewDidLoad() {
@@ -24,6 +24,10 @@ class ViewController: NSViewController {
             title="Click Me!"
             let myButton = NSButton(title: title, target: self, action: #selector(self.myButtonAction))
             self.view.addSubview(myButton)
+            //sort apps by name 
+//            self.apps.sort(by: {$0.name < $1.name})
+//            print(self.apps["google-chrome"]!.homepage)
+            let appArray = Array(self.apps.values).sorted(by: {$0.name < $1.name})
         }
     }
     override var representedObject: Any? {
@@ -54,12 +58,12 @@ class ViewController: NSViewController {
                         //gets the expected content length from the http header response. This will be useful when showing download progress for apps
                         //this currently converts bytes to megabytes by dividing by 1000000
                         let sizeOfContent = Float(response.response!.expectedContentLength as Int64)/1000000
-                        print(sizeOfContent)
+//                        print(sizeOfContent)
                         switch(response.result) {
                         case .success(_):
                             if let data = response.result.value {
-                                let appObj:App? = self.parseGithubRaw(githubRaw: data, cask: cask)
-//                                self.apps.append(appObj!)
+                                let appObj:App = self.parseGithubRaw(githubRaw: data, cask: cask)
+                                self.apps[appObj.caskName] = appObj
                                 mydispatch.leave()
                             }
                         case .failure(_):
@@ -73,7 +77,7 @@ class ViewController: NSViewController {
             print("File not found")
         }
     }
-    func parseGithubRaw(githubRaw:String, cask:String) -> App? {
+    func parseGithubRaw(githubRaw:String, cask:String) -> App {
         //TODO: Parse the github raw gile, create a new app object and return it to the main view controller to be added to the array of apps
 //        print(githubRaw)
         let separatedByNewline = githubRaw.components(separatedBy: .newlines)
@@ -101,17 +105,28 @@ class ViewController: NSViewController {
                 url = currentLineTrimmed.components(separatedBy: "url ")[1]
 //                print(url)
             case "homepage":
+                //TODO: Check to make sure that we replace any version.major etc strings in the homepage string
+                //Example would be sublime text
                 homepage = currentLineTrimmed.components(separatedBy: "homepage ")[1]
-//                print(homepage)
+                if(homepage.prefix(1)=="'" || homepage.prefix(1)=="\""){
+                    homepage.remove(at: homepage.startIndex)
+                }
+                if(homepage.suffix(1)=="'" || homepage.suffix(1)=="\""){
+                    homepage.remove(at: homepage.index(before: homepage.endIndex))
+                }
             default:
                 break
             }
         }
-        if(app==""){
-            print(cask)
-        }
-        return nil
+        return App(githubRaw: githubRaw, name: app, url: url, version: version, caskName: cask.replacingOccurrences(of: ".rb", with: ""), homepage: homepage)
     }
+    
+    /*
+     TODO: Write a function that takes in a version string, takes in a string to replace the version into
+     and then performs all of the logic for replacing the possible permutations of versions (version.major, etc)
+     Add in logic as we keep adding apps
+     */
+    
 }
             
 //            for cask in casks {
