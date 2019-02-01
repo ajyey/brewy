@@ -116,6 +116,7 @@ class ViewController: NSViewController {
                  - #{version.major}
                  - #{version.minor}
                  - #{version.patch}
+                 - #{version.major_minor}
                  - #{version.major_minor_patch}
                  - #{version.no_dots}
                  - #{version.after_colon}
