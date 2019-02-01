@@ -70,7 +70,6 @@ omnigraffle.rb
 omnioutliner.rb
 omniplan.rb
 omnipresence.rb
-onyx.rb
 openemu.rb
 opera.rb
 pdf-expert.rb
@@ -92,13 +91,11 @@ spotify.rb
 spotmenu.rb
 steam.rb
 sublime-text.rb
-sugarsync.rb
 superduper.rb
 swinsian.rb
 telegram.rb
 textexpander.rb
 the-unarchiver.rb
-tower.rb
 transmission.rb
 transmit.rb
 tunnelbear.rb

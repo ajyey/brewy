@@ -105,11 +105,28 @@ class ViewController: NSViewController {
                 url = currentLineTrimmed.components(separatedBy: "url ")[1]
 //                print(url)
                 //TODO: create method to handle all replacing
+                /*
+                 version permutations that we have to handle so far
+                 - #{version}
+                 - #{version.before_comma}
+                 - #{version.after_comma}
+                 - #{macos_release}
+                 - #{version.dots_to_hyphens}
+                 - #{version.dots_to_underscores}
+                 - #{version.major}
+                 - #{version.minor}
+                 - #{version.patch}
+                 - #{version.major_minor_patch}
+                 - #{version.no_dots}
+                 - #{version.after_colon}
+                 - #{version.after_comma.before_colon}
+                 - #{language}
+                 */
                 //Check for each permutaion and then replace all occurrences of the permutation by the correctly formatted version string
-                if(url.contains("#{version}")){
-                    print(url)
-                }
-//                print(url)
+//                if(url.contains("#{version}")){
+//                    print(url)
+//                }
+                print(url)
                 
             case "homepage":
                 //TODO: Check to make sure that we replace any version.major etc strings in the homepage string
