@@ -104,6 +104,13 @@ class ViewController: NSViewController {
             //TODO: handle url logic - replace all permutations of version in the url
                 url = currentLineTrimmed.components(separatedBy: "url ")[1]
 //                print(url)
+                //TODO: create method to handle all replacing
+                //Check for each permutaion and then replace all occurrences of the permutation by the correctly formatted version string
+                if(url.contains("#{version}")){
+                    print(url)
+                }
+//                print(url)
+                
             case "homepage":
                 //TODO: Check to make sure that we replace any version.major etc strings in the homepage string
                 //Example would be sublime text
