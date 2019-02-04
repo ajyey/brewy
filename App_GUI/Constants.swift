@@ -10,14 +10,14 @@ import Foundation
 
 struct Constants {
     static let VERSION = "#{version}"
+    static let VERSION_MAJOR = "#{version.major}"
+    static let VERSION_MINOR = "#{version.minor}"
+    static let VERSION_PATCH = "#{version.patch}"
     static let VERSION_BEFORE_COMMA = "#{version.before_comma}"
     static let VERSION_AFTER_COMMA = "#{version.after_comma}"
     static let MACOS_RELEASE = "#{macos_release}"
     static let VERSION_DOTS_TO_HYPHENS = "#{version.dots_to_hyphens}"
     static let VERSION_DOTS_TO_UNDERSCORES = "#{version.dots_to_underscores}"
-    static let VERSION_MAJOR = "#{version.major}"
-    static let VERSION_MINOR = "#{version.minor}"
-    static let VERSION_PATCH = "#{version.patch}"
     static let VERSION_MAJOR_MINOR = "#{version.major_minor}"
     static let VERSION_MAJOR_MINOR_PATCH = "#{version.major_minor_patch}"
     static let VERSION_NO_DOTS = "#{version.no_dots}"

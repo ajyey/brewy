@@ -117,6 +117,7 @@ class ViewController: NSViewController {
                 
                 homepage = currentLineTrimmed.components(separatedBy: "homepage ")[1]
                 homepage = removeLeadingAndTrailingQuotationMarks(str: homepage)
+                homepage = replaceVersionsInURLs(url: homepage, version: version)
 //                print(homepage)
             default:
                 break
@@ -134,13 +135,34 @@ class ViewController: NSViewController {
         //TODO:Implement this function for all version permutations
         var temp = url
         
+        // #{version}
         if temp.contains(Constants.VERSION){
             temp = temp.replacingOccurrences(of: Constants.VERSION, with: version)
         }
-        
-        if(temp.contains(Constants.VERSION_BEFORE_COMMA)){
+        // #{version.major}
+        if temp.contains(Constants.VERSION_MAJOR){
+            let versionMajor = version.split(separator: ".")[0]
+            temp = temp.replacingOccurrences(of: Constants.VERSION_MAJOR, with: versionMajor)
+        }
+        // #{version.minor}
+        if temp.contains(Constants.VERSION_MINOR){
+            let versionMinor = version.split(separator: ".")[1]
+            temp = temp.replacingOccurrences(of: Constants.VERSION_MINOR, with: versionMinor)
+        }
+        // #{version.patch}
+        if temp.contains(Constants.VERSION_PATCH){
+            let versionPatch = version.split(separator: ".")[2]
+            temp = temp.replacingOccurrences(of: Constants.VERSION_PATCH, with: versionPatch)
+        }
+        // #{version.before_comma}
+        if temp.contains(Constants.VERSION_BEFORE_COMMA){
             let beforeComma = version.split(separator: ",")[0]
             temp = temp.replacingOccurrences(of: Constants.VERSION_BEFORE_COMMA, with: beforeComma)
+        }
+        // #{version.after_comma}
+        if temp.contains(Constants.VERSION_AFTER_COMMA){
+            let afterComma = version.split(separator: ",")[1]
+            temp = temp.replacingOccurrences(of: Constants.VERSION_AFTER_COMMA, with: afterComma)
         }
         
         return temp
