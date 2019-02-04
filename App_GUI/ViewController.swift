@@ -96,13 +96,16 @@ class ViewController: NSViewController {
                 if app.contains("target: ") {
                     app = app.components(separatedBy: "target: ")[1]
                 }
+                app = removeLeadingAndTrailingQuotationMarks(str: app)
 //                print(app)
             case "version":
                 version = currentLineTrimmed.components(separatedBy: "version ")[1]
+                version = removeLeadingAndTrailingQuotationMarks(str: version)
 //                print(version)
             case "url":
             //TODO: handle url logic - replace all permutations of version in the url
                 url = currentLineTrimmed.components(separatedBy: "url ")[1]
+                url = removeLeadingAndTrailingQuotationMarks(str: url)
 //                print(url)
                 //TODO: create method to handle all replacing
                 /*
@@ -127,18 +130,15 @@ class ViewController: NSViewController {
 //                if(url.contains("#{version}")){
 //                    print(url)
 //                }
-                print(url)
+//                print(url)
                 
             case "homepage":
                 //TODO: Check to make sure that we replace any version.major etc strings in the homepage string
                 //Example would be sublime text
+                
                 homepage = currentLineTrimmed.components(separatedBy: "homepage ")[1]
-                if(homepage.prefix(1)=="'" || homepage.prefix(1)=="\""){
-                    homepage.remove(at: homepage.startIndex)
-                }
-                if(homepage.suffix(1)=="'" || homepage.suffix(1)=="\""){
-                    homepage.remove(at: homepage.index(before: homepage.endIndex))
-                }
+                homepage = removeLeadingAndTrailingQuotationMarks(str: homepage)
+//                print(homepage)
             default:
                 break
             }
@@ -151,6 +151,20 @@ class ViewController: NSViewController {
      and then performs all of the logic for replacing the possible permutations of versions (version.major, etc)
      Add in logic as we keep adding apps
      */
+    func replaceVersionsInURLs(url:String, version:String) -> String {
+        //TODO:Implement this function for all version permutations
+        return ""
+    }
+    func removeLeadingAndTrailingQuotationMarks(str:String)->String{
+        var temp = str
+        if(temp.prefix(1)=="'" || temp.prefix(1)=="\""){
+            temp.remove(at: temp.startIndex)
+        }
+        if(temp.suffix(1)=="'" || temp.suffix(1)=="\""){
+            temp.remove(at: temp.index(before: temp.endIndex))
+        }
+        return temp
+    }
     
 }
             
