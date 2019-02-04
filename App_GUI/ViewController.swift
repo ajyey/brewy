@@ -108,36 +108,7 @@ class ViewController: NSViewController {
                 url = removeLeadingAndTrailingQuotationMarks(str: url)
 //                print(url)
                 //TODO: create method to handle all replacing
-                /*
-                 version permutations that we have to handle so far
-                 - #{version}
-                 - #{version.before_comma}
-                 - #{version.after_comma}
-                 - #{macos_release}
-                 - #{version.dots_to_hyphens}
-                 - #{version.dots_to_underscores}
-                 - #{version.major}
-                 - #{version.minor}
-                 - #{version.patch}
-                 - #{version.major_minor}
-                 - #{version.major_minor_patch}
-                 - #{version.no_dots}
-                 - #{version.after_colon}
-                 - #{version.after_comma.before_colon}
-                 - #{language}
-                 */
-                //
-                if url.contains(Constants.VERSION){
-                    url = url.replacingOccurrences(of: Constants.VERSION, with: version)
-                }
-                if(url.contains(Constants.VERSION_BEFORE_COMMA)){
-                    let beforeComma = version.split(separator: ",")[0]
-                    url = url.replacingOccurrences(of: Constants.VERSION_BEFORE_COMMA, with: beforeComma)
-                }
-                //Check for each permutaion and then replace all occurrences of the permutation by the correctly formatted version string
-//                if(url.contains("#{version}")){
-//                    print(url)
-//                }
+                url = replaceVersionsInURLs(url: url, version: version)
                 print(url)
                 
             case "homepage":
@@ -161,7 +132,18 @@ class ViewController: NSViewController {
      */
     func replaceVersionsInURLs(url:String, version:String) -> String {
         //TODO:Implement this function for all version permutations
-        return ""
+        var temp = url
+        
+        if temp.contains(Constants.VERSION){
+            temp = temp.replacingOccurrences(of: Constants.VERSION, with: version)
+        }
+        
+        if(temp.contains(Constants.VERSION_BEFORE_COMMA)){
+            let beforeComma = version.split(separator: ",")[0]
+            temp = temp.replacingOccurrences(of: Constants.VERSION_BEFORE_COMMA, with: beforeComma)
+        }
+        
+        return temp
     }
     //  Removes leading and trailing quotation marks from all of the desired fields
     func removeLeadingAndTrailingQuotationMarks(str:String)->String{
