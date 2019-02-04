@@ -126,11 +126,19 @@ class ViewController: NSViewController {
                  - #{version.after_comma.before_colon}
                  - #{language}
                  */
+                //
+                if url.contains(Constants.VERSION){
+                    url = url.replacingOccurrences(of: Constants.VERSION, with: version)
+                }
+                if(url.contains(Constants.VERSION_BEFORE_COMMA)){
+                    let beforeComma = version.split(separator: ",")[0]
+                    url = url.replacingOccurrences(of: Constants.VERSION_BEFORE_COMMA, with: beforeComma)
+                }
                 //Check for each permutaion and then replace all occurrences of the permutation by the correctly formatted version string
 //                if(url.contains("#{version}")){
 //                    print(url)
 //                }
-//                print(url)
+                print(url)
                 
             case "homepage":
                 //TODO: Check to make sure that we replace any version.major etc strings in the homepage string
@@ -155,6 +163,7 @@ class ViewController: NSViewController {
         //TODO:Implement this function for all version permutations
         return ""
     }
+    //  Removes leading and trailing quotation marks from all of the desired fields
     func removeLeadingAndTrailingQuotationMarks(str:String)->String{
         var temp = str
         if(temp.prefix(1)=="'" || temp.prefix(1)=="\""){
