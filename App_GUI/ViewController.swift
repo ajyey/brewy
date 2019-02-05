@@ -96,87 +96,34 @@ class ViewController: NSViewController {
                 if app.contains("target: ") {
                     app = app.components(separatedBy: "target: ")[1]
                 }
-                app = removeLeadingAndTrailingQuotationMarks(str: app)
+                app = Util.removeLeadingAndTrailingQuotationMarks(str: app)
 //                print(app)
             case "version":
                 version = currentLineTrimmed.components(separatedBy: "version ")[1]
-                version = removeLeadingAndTrailingQuotationMarks(str: version)
+                version = Util.removeLeadingAndTrailingQuotationMarks(str: version)
 //                print(version)
             case "url":
             //TODO: handle url logic - replace all permutations of version in the url
                 url = currentLineTrimmed.components(separatedBy: "url ")[1]
-                url = removeLeadingAndTrailingQuotationMarks(str: url)
+                url = Util.removeLeadingAndTrailingQuotationMarks(str: url)
 //                print(url)
                 //TODO: create method to handle all replacing
-                url = replaceVersionsInURLs(url: url, version: version)
-                print(url)
+                url = Util.replaceVersionsInURLs(url: url, version: version)
+//                print(url)
                 
             case "homepage":
                 //TODO: Check to make sure that we replace any version.major etc strings in the homepage string
                 //Example would be sublime text
                 
                 homepage = currentLineTrimmed.components(separatedBy: "homepage ")[1]
-                homepage = removeLeadingAndTrailingQuotationMarks(str: homepage)
-                homepage = replaceVersionsInURLs(url: homepage, version: version)
+                homepage = Util.removeLeadingAndTrailingQuotationMarks(str: homepage)
+                homepage = Util.replaceVersionsInURLs(url: homepage, version: version)
 //                print(homepage)
             default:
                 break
             }
         }
         return App(githubRaw: githubRaw, name: app, url: url, version: version, caskName: cask.replacingOccurrences(of: ".rb", with: ""), homepage: homepage)
-    }
-    
-    /*
-     TODO: Write a function that takes in a version string, takes in a string to replace the version into
-     and then performs all of the logic for replacing the possible permutations of versions (version.major, etc)
-     Add in logic as we keep adding apps
-     */
-    func replaceVersionsInURLs(url:String, version:String) -> String {
-        //TODO:Implement this function for all version permutations
-        var temp = url
-        
-        // #{version}
-        if temp.contains(Constants.VERSION){
-            temp = temp.replacingOccurrences(of: Constants.VERSION, with: version)
-        }
-        // #{version.major}
-        if temp.contains(Constants.VERSION_MAJOR){
-            let versionMajor = version.split(separator: ".")[0]
-            temp = temp.replacingOccurrences(of: Constants.VERSION_MAJOR, with: versionMajor)
-        }
-        // #{version.minor}
-        if temp.contains(Constants.VERSION_MINOR){
-            let versionMinor = version.split(separator: ".")[1]
-            temp = temp.replacingOccurrences(of: Constants.VERSION_MINOR, with: versionMinor)
-        }
-        // #{version.patch}
-        if temp.contains(Constants.VERSION_PATCH){
-            let versionPatch = version.split(separator: ".")[2]
-            temp = temp.replacingOccurrences(of: Constants.VERSION_PATCH, with: versionPatch)
-        }
-        // #{version.before_comma}
-        if temp.contains(Constants.VERSION_BEFORE_COMMA){
-            let beforeComma = version.split(separator: ",")[0]
-            temp = temp.replacingOccurrences(of: Constants.VERSION_BEFORE_COMMA, with: beforeComma)
-        }
-        // #{version.after_comma}
-        if temp.contains(Constants.VERSION_AFTER_COMMA){
-            let afterComma = version.split(separator: ",")[1]
-            temp = temp.replacingOccurrences(of: Constants.VERSION_AFTER_COMMA, with: afterComma)
-        }
-        
-        return temp
-    }
-    //  Removes leading and trailing quotation marks from all of the desired fields
-    func removeLeadingAndTrailingQuotationMarks(str:String)->String{
-        var temp = str
-        if(temp.prefix(1)=="'" || temp.prefix(1)=="\""){
-            temp.remove(at: temp.startIndex)
-        }
-        if(temp.suffix(1)=="'" || temp.suffix(1)=="\""){
-            temp.remove(at: temp.index(before: temp.endIndex))
-        }
-        return temp
     }
     
 }
