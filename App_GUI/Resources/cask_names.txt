@@ -57,6 +57,7 @@ iterm2.rb
 itsycal.rb
 jetbrains-toolbox.rb
 keepingyouawake.rb
+keyboardcleantool.rb
 keyboard-maestro.rb
 kindle.rb
 kodi.rb

@@ -8,12 +8,6 @@
 
 import Foundation
 
-
-/*
- TODO: Write a function that takes in a version string, takes in a string to replace the version into
- and then performs all of the logic for replacing the possible permutations of versions (version.major, etc)
- Add in logic as we keep adding apps
- */
 class Util {
     static func replaceVersionsInURLs(url:String, version:String) -> String {
         var temp = url
@@ -93,15 +87,15 @@ class Util {
             temp = temp.replacingOccurrences(of: Constants.MACOS_RELEASE, with: macosRelease)
         }
         // #{language}
-        //TODO: This only handles english for firefox right now. In the future, add support for multiple languages
+        //TODO: This only handles english US for firefox right now. In the future, add support for multiple languages
         if temp.contains(Constants.LANGUAGE){
             temp = temp.replacingOccurrences(of: Constants.LANGUAGE, with: "en-US")
         }
-        
-        
-        
+//        print(temp)
         return temp
     }
+    
+    
     //  Removes leading and trailing quotation marks from all of the desired fields
     static func removeLeadingAndTrailingQuotationMarks(str:String)->String{
         var temp = str
@@ -112,6 +106,13 @@ class Util {
             temp.remove(at: temp.index(before: temp.endIndex))
         }
         return temp
+    }
+    
+    static func handleMultipleVersionsAndURLs(githubRaw:String) -> String {
+        var gh = githubRaw
+        
+        
+        return ""
     }
     
 }

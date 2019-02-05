@@ -85,6 +85,7 @@ class ViewController: NSViewController {
         var url:String = ""
         var app:String = ""
         var homepage:String = ""
+        //TODO: down the line, here is where we would handle apps with different versions and urls for different macos versions. For now, we will assume the user is running either High Sierra or Mojave
         for line in separatedByNewline {
             let currentLineTrimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
             let split = currentLineTrimmed.components(separatedBy: .whitespaces)
@@ -103,7 +104,9 @@ class ViewController: NSViewController {
                 version = Util.removeLeadingAndTrailingQuotationMarks(str: version)
 //                print(version)
             case "url":
-            //TODO: handle url logic - replace all permutations of version in the url
+                if(url != ""){
+//                    print(cask)
+                }
                 url = currentLineTrimmed.components(separatedBy: "url ")[1]
                 url = Util.removeLeadingAndTrailingQuotationMarks(str: url)
 //                print(url)
@@ -112,9 +115,6 @@ class ViewController: NSViewController {
 //                print(url)
                 
             case "homepage":
-                //TODO: Check to make sure that we replace any version.major etc strings in the homepage string
-                //Example would be sublime text
-                
                 homepage = currentLineTrimmed.components(separatedBy: "homepage ")[1]
                 homepage = Util.removeLeadingAndTrailingQuotationMarks(str: homepage)
                 homepage = Util.replaceVersionsInURLs(url: homepage, version: version)
