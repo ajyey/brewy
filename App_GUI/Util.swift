@@ -47,6 +47,58 @@ class Util {
             let afterComma = version.split(separator: ",")[1]
             temp = temp.replacingOccurrences(of: Constants.VERSION_AFTER_COMMA, with: afterComma)
         }
+        // #{version.dots_to_hyphens}
+        if temp.contains(Constants.VERSION_DOTS_TO_HYPHENS){
+            let dotsToHyphens = version.replacingOccurrences(of: ".", with: "-")
+            temp = temp.replacingOccurrences(of: Constants.VERSION_DOTS_TO_HYPHENS, with: dotsToHyphens)
+        }
+        // #{version.dots_to_underscores}
+        if temp.contains(Constants.VERSION_DOTS_TO_UNDERSCORES){
+            let dotsToUnderscores = version.replacingOccurrences(of: ".", with: "_")
+            temp = temp.replacingOccurrences(of: Constants.VERSION_DOTS_TO_UNDERSCORES, with: dotsToUnderscores)
+        }
+        // #{version.major_minor}
+        if temp.contains(Constants.VERSION_MAJOR_MINOR){
+            let versionSplit = version.split(separator: ".")
+            let majorMinor = versionSplit[0]+"."+versionSplit[1]
+            temp = temp.replacingOccurrences(of: Constants.VERSION_MAJOR_MINOR, with: majorMinor)
+        }
+        // #{version.major_minor_patch}
+        if temp.contains(Constants.VERSION_MAJOR_MINOR_PATCH){
+            let versionSplit = version.split(separator: ".")
+            let majorMinorPatch = versionSplit[0]+"."+versionSplit[1]+"."+versionSplit[2]
+            temp = temp.replacingOccurrences(of: Constants.VERSION_MAJOR_MINOR_PATCH, with: majorMinorPatch)
+        }
+        // #{version.no_dots}
+        if temp.contains(Constants.VERSION_NO_DOTS){
+            let noDots = version.replacingOccurrences(of: ".", with: "")
+            temp = temp.replacingOccurrences(of: Constants.VERSION_NO_DOTS, with: noDots)
+        }
+        // #{version.after_colon}
+        if temp.contains(Constants.VERSION_AFTER_COLON){
+            let afterColon = version.split(separator: ":")[1]
+            temp = temp.replacingOccurrences(of: Constants.VERSION_AFTER_COLON, with: afterColon)
+        }
+        // #{version.after_comma_before_colon}
+        if temp.contains(Constants.VERSION_AFTER_COMMA_BEFORE_COLON){
+            let afterComma = version.split(separator: ",")[1]
+            let beforeColon = afterComma.split(separator: ":")[0]
+            temp = temp.replacingOccurrences(of: Constants.VERSION_AFTER_COMMA_BEFORE_COLON, with: beforeColon)
+        }
+        // #{macos_release}
+        if temp.contains(Constants.MACOS_RELEASE){
+            let osMajorVersion = String(ProcessInfo().operatingSystemVersion.majorVersion)
+            let osMinorVersion = String(ProcessInfo().operatingSystemVersion.minorVersion)
+            let macosRelease = osMajorVersion+osMinorVersion
+            temp = temp.replacingOccurrences(of: Constants.MACOS_RELEASE, with: macosRelease)
+        }
+        // #{language}
+        //TODO: This only handles english for firefox right now. In the future, add support for multiple languages
+        if temp.contains(Constants.LANGUAGE){
+            temp = temp.replacingOccurrences(of: Constants.LANGUAGE, with: "en-US")
+        }
+        
+        
         
         return temp
     }

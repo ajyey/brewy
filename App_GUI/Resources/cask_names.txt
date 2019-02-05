@@ -70,6 +70,7 @@ omnigraffle.rb
 omnioutliner.rb
 omniplan.rb
 omnipresence.rb
+onyx.rb
 openemu.rb
 opera.rb
 pdf-expert.rb
