@@ -4,7 +4,6 @@ import SwiftyJSON
 import PromiseKit
 import Foundation
 
-
 class ViewController: NSViewController {
     var apps:[String: App]=[:]
     let githubRaw = "https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/"
@@ -60,6 +59,7 @@ class ViewController: NSViewController {
                 let downloadsUrl = try! fm.url(for: .downloadsDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
 //                print(downloadsUrl+"Evernote.cdr")
                 let cdrPath = downloadsUrl.appendingPathComponent("Evernote.cdr").absoluteString
+                let removeCdr = downloadsUrl.appendingPathComponent("Evernote.cdr")
                 //convert evernote to cdr so we can bypass the EULA
                 let args = "convert \(fullPath) -format UDTO -ov -o \(cdrPath)"
                 print(cdrPath)
@@ -83,8 +83,19 @@ class ViewController: NSViewController {
                     try! fm.removeItem(atPath: "/Applications/Evernote.app")
                 }
                 try! fm.copyItem(atPath: "/Volumes/Evernote/Evernote.app", toPath: "/Applications/Evernote.app")
-                
-                //now unmount the
+                //delete the cdr file
+                print("Removing cdr")
+                try! fm.removeItem(at:removeCdr)
+                //now unmount the volume
+                let unmount = "detach /Volumes/Evernote"
+                var (o,e,s) = Util.runCommand(cmd: Constants.HDIUTIL, args: unmount.components(separatedBy: " "))
+                if(s == 1){
+                    print("An error occured")
+                    print(e)
+                }else if(s==0){
+                    print("unmounted")
+                }
+
                 
         }
     }
