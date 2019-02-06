@@ -9,6 +9,8 @@
 import Foundation
 
 struct Constants {
+    
+    //version permutations
     static let VERSION = "#{version}"
     static let VERSION_MAJOR = "#{version.major}"
     static let VERSION_MINOR = "#{version.minor}"
@@ -24,4 +26,6 @@ struct Constants {
     static let VERSION_AFTER_COMMA_BEFORE_COLON = "#{version.after_comma.before_colon}"
     static let MACOS_RELEASE = "#{macos_release}"
     static let LANGUAGE = "#{language}"
+    
+    static let HDIUTIL = "/usr/bin/hdiutil"
 }

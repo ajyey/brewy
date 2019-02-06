@@ -8,13 +8,23 @@
 
 import Foundation
 
-class App {
+class App : CustomStringConvertible {
     var githubRaw: String
     var name: String
     var url: String
     var version: String
     var caskName:String
     var homepage:String
+    
+    public var description: String {
+        return """
+        Name: \(name),
+        URL: \(url),
+        Version: \(version),
+        Cask: \(caskName),
+        Homepage: \(homepage)\n
+        """
+    }
     
     //MARK: Initialization
     init(githubRaw:String, name:String, url:String, version:String, caskName:String, homepage:String){

@@ -1,15 +1,9 @@
-//
-//  ViewController.swift
-//  App_GUI
-//
-//  Created by AJ Leonard on 1/21/19.
-//  Copyright © 2019 AJ Leonard. All rights reserved.
-//
-
 import Cocoa
 import Alamofire
 import SwiftyJSON
 import PromiseKit
+import Foundation
+
 
 class ViewController: NSViewController {
     var apps:[String: App]=[:]
@@ -21,13 +15,16 @@ class ViewController: NSViewController {
         let myGroup = DispatchGroup()
         createListOfApps(mydispatch: myGroup)
         myGroup.notify(queue: .main){
-            title="Click Me!"
+            title="Download Evernote"
             let myButton = NSButton(title: title, target: self, action: #selector(self.myButtonAction))
             self.view.addSubview(myButton)
-            //sort apps by name 
+//            for app in self.apps {
+//                print(app.value.description)
+//            }
+            //sort apps by name
 //            self.apps.sort(by: {$0.name < $1.name})
 //            print(self.apps["google-chrome"]!.homepage)
-            let appArray = Array(self.apps.values).sorted(by: {$0.name < $1.name})
+//            let appArray = Array(self.apps.values).sorted(by: {$0.name < $1.name})
         }
     }
     override var representedObject: Any? {
@@ -36,10 +33,66 @@ class ViewController: NSViewController {
         }
     }
     @objc func myButtonAction(sender: NSButton!) {
-        sender.title="You clicked me!"
+        sender.title="Downloading..."
         //resizes the button to fit new title/contents
         sender.sizeToFit()
+        let url = self.apps["Evernote"]!.url
+        print(url)
+        //download evernote
+        let destination = DownloadRequest.suggestedDownloadDestination(for: .downloadsDirectory)
+        //TODO: this should be in its own thread so we dont lock up the gui while performing the download and installation
+        Alamofire.download(url, to: destination)
+            .downloadProgress {progress in
+                print("Progress: \(Double(round(progress.fractionCompleted*1000)/1000))")
+            }
+            .response{
+                response in
+                //get the suggested file name chosen by alamofire
+                print("Evernote downloaded..")
+                print("Converting dmg..")
+//                let destination = response.destinationURL!.absoluteString.split(separator: "/")
+                let fullPath = response.destinationURL!.absoluteString
+                let dmg = response.destinationURL!
+                print(fullPath)
+//                let fileName = destination[destination.count-1]
+                //convert the dmg to cdr of the same name
+                let fm = FileManager.default
+                let downloadsUrl = try! fm.url(for: .downloadsDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+//                print(downloadsUrl+"Evernote.cdr")
+                let cdrPath = downloadsUrl.appendingPathComponent("Evernote.cdr").absoluteString
+                //convert evernote to cdr so we can bypass the EULA
+                let args = "convert \(fullPath) -format UDTO -ov -o \(cdrPath)"
+                print(cdrPath)
+                Util.runCommand(cmd: Constants.HDIUTIL, args: args.components(separatedBy: " "))
+                //delete the dmg after converting it to cdr
+                try! fm.removeItem(at: dmg)
+                //mount the volume
+                print("dmg converted.")
+                let mountArgs = "attach -nobrowse /Users/AJ/Downloads/Evernote.cdr"
+//                print(fullPath)
+                var (output,error,status) = Util.runCommand(cmd: Constants.HDIUTIL, args: mountArgs.components(separatedBy: " "))
+                if(status == 1){
+                    print("An error occured")
+                    print(error)
+                }else if(status==0){
+                    print("success")
+                }
+                //now move the application from the mounted volume into the applications folder
+                //check if the file already exists
+                if fm.fileExists(atPath: "/Applications/Evernote.app"){
+                    try! fm.removeItem(atPath: "/Applications/Evernote.app")
+                }
+                try! fm.copyItem(atPath: "/Volumes/Evernote/Evernote.app", toPath: "/Applications/Evernote.app")
+                
+                //now unmount the
+                
+        }
     }
+    
+    func installAppFromDMG(file:String) {
+        //
+    }
+    
     func createListOfApps(mydispatch:DispatchGroup){
         //check if the cask list exists
         if let path = Bundle.main.path(forResource: "cask_names", ofType: "txt" , inDirectory: "Resources"){
@@ -63,7 +116,7 @@ class ViewController: NSViewController {
                         case .success(_):
                             if let data = response.result.value {
                                 let appObj:App = self.parseGithubRaw(githubRaw: data, cask: cask)
-                                self.apps[appObj.caskName] = appObj
+                                self.apps[appObj.name.components(separatedBy: ".app")[0]] = appObj
                                 mydispatch.leave()
                             }
                         case .failure(_):
