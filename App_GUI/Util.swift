@@ -108,13 +108,6 @@ class Util {
         return temp
     }
     
-    static func handleMultipleVersionsAndURLs(githubRaw:String) -> String {
-        var gh = githubRaw
-        
-        
-        return ""
-    }
-    
     //runs a
     static func runCommand(cmd :String, args : [String]) -> (output: [String], error: [String], exitCode: Int32) {
         

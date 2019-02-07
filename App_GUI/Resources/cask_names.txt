@@ -1,7 +1,5 @@
-1password.rb
 5kplayer.rb
 adium.rb
-alfred.rb
 android-studio.rb
 appcleaner.rb
 appcode.rb

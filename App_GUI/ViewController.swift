@@ -121,12 +121,11 @@ class ViewController: NSViewController {
                         response in
                         //gets the expected content length from the http header response. This will be useful when showing download progress for apps
                         //this currently converts bytes to megabytes by dividing by 1000000
-                        let sizeOfContent = Float(response.response!.expectedContentLength as Int64)/1000000
-//                        print(sizeOfContent)
+                        let sizeOfContent = Double((response.response!.expectedContentLength as Int64)/1000000)
                         switch(response.result) {
                         case .success(_):
                             if let data = response.result.value {
-                                let appObj:App = self.parseGithubRaw(githubRaw: data, cask: cask)
+                                let appObj:App = self.parseGithubRaw(using: data, for: cask)
                                 self.apps[appObj.name.components(separatedBy: ".app")[0]] = appObj
                                 mydispatch.leave()
                             }
@@ -141,7 +140,7 @@ class ViewController: NSViewController {
             print("File not found")
         }
     }
-    func parseGithubRaw(githubRaw:String, cask:String) -> App {
+    func parseGithubRaw(using githubRaw:String, for cask:String) -> App {
         //TODO: Parse the github raw gile, create a new app object and return it to the main view controller to be added to the array of apps
 //        print(githubRaw)
         let separatedByNewline = githubRaw.components(separatedBy: .newlines)
