@@ -8,6 +8,7 @@ atom.rb
 bartender.rb
 bbedit.rb
 bettertouchtool.rb
+boostnote.rb
 brackets.rb
 brave-browser.rb
 caffeine.rb
@@ -107,4 +108,5 @@ vyprvpn.rb
 wechat.rb
 whatsapp.rb
 windscribe.rb
+workflowy.rb
 yummy-ftp.rb

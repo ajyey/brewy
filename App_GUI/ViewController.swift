@@ -3,7 +3,6 @@ import Alamofire
 import SwiftyJSON
 import PromiseKit
 import Foundation
-
 class ViewController: NSViewController {
     var apps:[String: App]=[:]
     let githubRaw = "https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/"
@@ -124,9 +123,9 @@ class ViewController: NSViewController {
                         let sizeOfContent = Double((response.response!.expectedContentLength as Int64)/1000000)
                         switch(response.result) {
                         case .success(_):
-                            if let data = response.result.value {
-                                let appObj:App = self.parseGithubRaw(using: data, for: cask)
-                                self.apps[appObj.name.components(separatedBy: ".app")[0]] = appObj
+                            if let githubResponse = response.result.value {
+                                let app:App = self.parseGithubRaw(using: githubResponse, for: cask)
+                                self.apps[app.name.components(separatedBy: ".app")[0]] = app
                                 mydispatch.leave()
                             }
                         case .failure(_):

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class App : CustomStringConvertible {
+class App {
     var githubRaw: String
     var name: String
     var url: String
