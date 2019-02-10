@@ -113,5 +113,6 @@ vyprvpn.rb
 wechat.rb
 whatsapp.rb
 windscribe.rb
+wireshark.rb
 workflowy.rb
 yummy-ftp.rb
