@@ -5,7 +5,6 @@ import PromiseKit
 import Foundation
 class ViewController: NSViewController {
     var apps:[String: App]=[:]
-    let githubRaw = "https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +68,7 @@ class ViewController: NSViewController {
                 print("dmg converted.")
                 let mountArgs = "attach -nobrowse /Users/AJ/Downloads/Evernote.cdr"
 //                print(fullPath)
-                var (output,error,status) = Util.runCommand(cmd: Constants.HDIUTIL, args: mountArgs.components(separatedBy: " "))
+                let (error, _, status) = Util.runCommand(cmd: Constants.HDIUTIL, args: mountArgs.components(separatedBy: " "))
                 if(status == 1){
                     print("An error occured")
                     print(error)
@@ -87,7 +86,7 @@ class ViewController: NSViewController {
                 try! fm.removeItem(at:removeCdr)
                 //now unmount the volume
                 let unmount = "detach /Volumes/Evernote"
-                var (o,e,s) = Util.runCommand(cmd: Constants.HDIUTIL, args: unmount.components(separatedBy: " "))
+                var (e , _, s) = Util.runCommand(cmd: Constants.HDIUTIL, args: unmount.components(separatedBy: " "))
                 if(s == 1){
                     print("An error occured")
                     print(e)
@@ -115,7 +114,7 @@ class ViewController: NSViewController {
                         continue
                     }
                     mydispatch.enter()
-                    let url = githubRaw + cask
+                    let url = Constants.GITHUB_RAW_URL + cask
                     Alamofire.request(url).responseString{
                         response in
                         //gets the expected content length from the http header response. This will be useful when showing download progress for apps

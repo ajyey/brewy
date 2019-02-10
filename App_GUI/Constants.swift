@@ -28,4 +28,5 @@ struct Constants {
     static let LANGUAGE = "#{language}"
     
     static let HDIUTIL = "/usr/bin/hdiutil"
+    static let GITHUB_RAW_URL = "https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/"
 }
