@@ -11,6 +11,7 @@ bettertouchtool.rb
 boostnote.rb
 brackets.rb
 brave-browser.rb
+cacher.rb
 caffeine.rb
 calibre.rb
 carbon-copy-cloner.rb
@@ -18,6 +19,8 @@ chocolat.rb
 clementine.rb
 coconutbattery.rb
 coda.rb
+coteditor.rb
+couchpotato.rb
 cyberduck.rb
 cyberghost.rb
 daisydisk.rb
@@ -39,6 +42,7 @@ evernote.rb
 firefox.rb
 flux.rb
 flycut.rb
+fork.rb
 franz.rb
 geekbench.rb
 gimp.rb
@@ -66,7 +70,9 @@ lighttable.rb
 lightworks.rb
 liteicon.rb
 macdown.rb
+marked.rb
 marsedit.rb
+mongodb.rb
 mysqlworkbench.rb
 notion.rb
 omnifocus.rb
@@ -81,6 +87,7 @@ pdf-expert.rb
 pdfelement.rb
 plex-media-player.rb
 plex-media-server.rb
+postgres.rb
 purevpn.rb
 pycharm-ce.rb
 qbittorrent.rb
@@ -101,6 +108,7 @@ swinsian.rb
 telegram.rb
 textexpander.rb
 the-unarchiver.rb
+tor-browser.rb
 transmission.rb
 transmit.rb
 tunnelbear.rb
