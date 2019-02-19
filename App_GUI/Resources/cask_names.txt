@@ -52,6 +52,7 @@ go2shell.rb
 google-backup-and-sync.rb
 google-chrome.rb
 handbrake.rb
+heaven.rb
 imagealpha.rb
 imageoptim.rb
 intellij-idea-ce.rb
