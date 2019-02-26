@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "21AB1DF121F5BD0F00A1A380"
-               BuildableName = "App_GUI.app"
-               BlueprintName = "App_GUI"
-               ReferencedContainer = "container:App_GUI.xcodeproj">
+               BlueprintIdentifier = "1041931C6F6E832D4B5A1F91DD08C754"
+               BuildableName = "Pods_brewy.framework"
+               BlueprintName = "Pods-brewy"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21AB1DF121F5BD0F00A1A380"
-            BuildableName = "App_GUI.app"
-            BlueprintName = "App_GUI"
-            ReferencedContainer = "container:App_GUI.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -47,21 +38,19 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      customWorkingDirectory = "/Users/AJ/Development/XCodeProjects/App_GUI/App_GUI"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21AB1DF121F5BD0F00A1A380"
-            BuildableName = "App_GUI.app"
-            BlueprintName = "App_GUI"
-            ReferencedContainer = "container:App_GUI.xcodeproj">
+            BlueprintIdentifier = "1041931C6F6E832D4B5A1F91DD08C754"
+            BuildableName = "Pods_brewy.framework"
+            BlueprintName = "Pods-brewy"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -71,16 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21AB1DF121F5BD0F00A1A380"
-            BuildableName = "App_GUI.app"
-            BlueprintName = "App_GUI"
-            ReferencedContainer = "container:App_GUI.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

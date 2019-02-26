@@ -1,0 +1,6 @@
+framework module Pods_brewy {
+  umbrella header "Pods-brewy-umbrella.h"
+
+  export *
+  module * { export * }
+}
