@@ -1,7 +1,6 @@
 import Cocoa
 import Alamofire
 import SwiftyJSON
-import PromiseKit
 import Foundation
 class ViewController: NSViewController {
     var apps:[String: App]=[:]

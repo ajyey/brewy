@@ -8,6 +8,5 @@ target 'brewy' do
     # Pods for MyApp
     pod 'Alamofire'
     pod 'SwiftyJSON'
-    pod 'PromiseKit'
   end
   
