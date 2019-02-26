@@ -36,6 +36,7 @@ class ViewController: NSViewController {
         let url = self.apps["Evernote"]!.url
         print(url)
         //download evernote
+        //gets the suggested download destination (filename)
         let destination = DownloadRequest.suggestedDownloadDestination(for: .downloadsDirectory)
         //TODO: this should be in its own thread so we dont lock up the gui while performing the download and installation
         Alamofire.download(url, to: destination)
